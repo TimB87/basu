@@ -56,6 +56,7 @@ possible_cc_flags = [
         '-Wno-missing-field-initializers',
         '-Wno-unused-result',
         '-Wno-format-signedness',
+        '-Wno-format-nonliteral',
 
         # work-around for gcc 7.1 turning this on on its own.
         '-Wno-error=nonnull',
@@ -230,7 +231,9 @@ threads = dependency('threads')
 librt = cc.find_library('rt')
 libm = cc.find_library('m')
 
-libcap = dependency('libcap')
+libcap = dependency('libcap', required: false)
+have_libcap = libcap.found()
+conf.set10('HAVE_LIBCAP', have_libcap)
 
 want_audit = get_option('audit')
 if want_audit != 'false'

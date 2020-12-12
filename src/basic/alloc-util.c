@@ -6,6 +6,12 @@
 #include "alloc-util.h"
 #include "util.h"
 
+#ifdef __FreeBSD__
+static void *mempcpy(void *dest, const void *src, size_t n) {
+        return (char *)memcpy(dest, src, n) + n;
+}
+#endif
+
 void* memdup(const void *p, size_t l) {
         void *ret;
 

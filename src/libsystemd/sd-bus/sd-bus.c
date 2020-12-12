@@ -1,6 +1,9 @@
 /* SPDX-License-Identifier: LGPL-2.1+ */
 
+#ifdef __linux__
 #include <endian.h>
+#endif
+
 #include <netdb.h>
 #include <poll.h>
 #include <pthread.h>
@@ -24,6 +27,16 @@
 #include "parse-util.h"
 #include "process-util.h"
 #include "strv.h"
+
+#define ENOPKG 1
+#define ENODATA 1
+#define secure_getenv getenv
+
+#ifdef __FreeBSD__
+static void *mempcpy(void *dest, const void *src, size_t n) {
+        return (char *)memcpy(dest, src, n) + n;
+}
+#endif
 
 #define log_debug_bus_message(m)                                         \
         do {                                                             \

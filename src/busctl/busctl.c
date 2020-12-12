@@ -1,7 +1,6 @@
 /* SPDX-License-Identifier: LGPL-2.1+ */
 
 #include <getopt.h>
-#include <stdio_ext.h>
 
 #include "sd-bus.h"
 
@@ -995,8 +994,6 @@ static int introspect(int argc, char **argv, void *userdata) {
                         mf = open_memstream(&buf, &sz);
                         if (!mf)
                                 return log_oom();
-
-                        (void) __fsetlocking(mf, FSETLOCKING_BYCALLER);
 
                         r = format_cmdline(reply, mf, false);
                         if (r < 0)
@@ -2062,7 +2059,7 @@ static int set_property(int argc, char **argv, void *userdata) {
         return 0;
 }
 
-static int help(void) {
+static int help(char *program_name) {
         printf("%s [OPTIONS...] {COMMAND} ...\n\n"
                "Introspect the bus.\n\n"
                "  -h --help               Show this help\n"
@@ -2103,7 +2100,7 @@ static int help(void) {
                "                          Set property value\n"
                "  help                    Show this help\n"
                "\nSee the %s for details.\n"
-               , program_invocation_short_name
+               , program_name
                , "busctl(1) man page"
         );
 
@@ -2111,7 +2108,7 @@ static int help(void) {
 }
 
 static int verb_help(int argc, char **argv, void *userdata) {
-        return help();
+        return help(argv[0]);
 }
 
 static int parse_argv(int argc, char *argv[]) {
@@ -2173,7 +2170,7 @@ static int parse_argv(int argc, char *argv[]) {
                 switch (c) {
 
                 case 'h':
-                        return help();
+                        return help(argv[0]);
 
                 case ARG_VERSION:
                         return version();
