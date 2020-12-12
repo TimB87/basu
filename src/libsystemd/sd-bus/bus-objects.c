@@ -14,8 +14,7 @@
 #include "bus-type.h"
 #include "string-util.h"
 #include "strv.h"
-
-#define ENOPKG 1
+#include "missing.h"
 
 static int node_vtable_get_userdata(
                 sd_bus *bus,

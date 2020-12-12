@@ -13,12 +13,11 @@
 #include "string-util.h"
 #include "strv.h"
 #include "terminal-util.h"
+#include "missing.h"
 
 #if HAVE_LIBCAP
 #include "capability-util.h"
 #endif
-
-#define ENODATA 1
 
 static char *indent(unsigned level, unsigned flags) {
         char *p;

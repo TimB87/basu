@@ -20,12 +20,11 @@
 #include "strv.h"
 #include "terminal-util.h"
 #include "user-util.h"
+#include "missing.h"
 
 #if HAVE_LIBCAP
 #include "capability-util.h"
 #endif
-
-#define ENODATA 1
 
 enum {
         CAP_OFFSET_INHERITABLE = 0,

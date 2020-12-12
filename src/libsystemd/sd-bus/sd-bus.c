@@ -27,9 +27,8 @@
 #include "parse-util.h"
 #include "process-util.h"
 #include "strv.h"
+#include "missing.h"
 
-#define ENOPKG 1
-#define ENODATA 1
 #define secure_getenv getenv
 
 #ifdef __FreeBSD__

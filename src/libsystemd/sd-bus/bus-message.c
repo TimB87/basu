@@ -18,8 +18,7 @@
 #include "string-util.h"
 #include "strv.h"
 #include "utf8.h"
-
-#define ENODATA 1
+#include "missing.h"
 
 #ifdef __FreeBSD__
 static void *mempcpy(void *dest, const void *src, size_t n) {

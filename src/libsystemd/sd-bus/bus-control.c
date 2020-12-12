@@ -13,13 +13,11 @@
 #include "string-util.h"
 #include "strv.h"
 #include "user-util.h"
+#include "missing.h"
 
 #if HAVE_LIBCAP
 #include "capability-util.h"
 #endif
-
-#define ENOPKG 1
-#define ENODATA 1
 
 _public_ int sd_bus_get_unique_name(sd_bus *bus, const char **unique) {
         int r;
